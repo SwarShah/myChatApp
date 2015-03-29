@@ -47,6 +47,7 @@ public final class R {
         public static final int connect=0x7f060004;
         public static final int enterName=0x7f060003;
         public static final int hello_world=0x7f060001;
+        public static final int name=0x7f060005;
     }
     public static final class style {
         /** 

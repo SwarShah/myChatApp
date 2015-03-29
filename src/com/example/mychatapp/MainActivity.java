@@ -1,6 +1,7 @@
 package com.example.mychatapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +28,11 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				name = etName.getText().toString();
 				if(!name.trim().isEmpty()){
-					Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG);
+					//Testing
+					//Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
+					Intent i = new Intent();
+					i.putExtra("Name", name);
+					startActivity(i);
 				}
 				else{
 					Toast.makeText(getApplicationContext(), "Please enter your name.", Toast.LENGTH_LONG).show();
