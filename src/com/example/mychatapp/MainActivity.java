@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 				if(!name.trim().isEmpty()){
 					//Testing
 					//Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
-					Intent i = new Intent();
+					Intent i = new Intent(getApplicationContext(), ChatActivity.class);
 					i.putExtra("Name", name);
 					startActivity(i);
 				}
