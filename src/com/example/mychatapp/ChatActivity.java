@@ -8,6 +8,7 @@ import com.codebutler.android_websockets.WebSocketClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,9 +24,6 @@ import android.widget.ListView;
 
 import javax.json.*;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 public class ChatActivity extends Activity {
 	//Declaration of variables
 	static final String WEBSOCKETURL = "ws://mychatws-swar.rhcloud.com:8000/chat?name=";
@@ -50,7 +48,7 @@ public class ChatActivity extends Activity {
 		btnSend = (Button)findViewById(R.id.sendBtn);
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
 		btnLeave = (Button)findViewById(R.id.leaveBtn);
-		sp = this.getSharedPreferences("com.example.myChatApp", 0);
+		sp = this.getSharedPreferences("com.example.myChatApp", Context.MODE_PRIVATE);
 		androidClient = new WebSocketClient(URI.create(WEBSOCKETURL + URLEncoder.encode(name)), new WebSocketClient.Listener() {
 			
 			@Override
@@ -113,12 +111,13 @@ public class ChatActivity extends Activity {
 	//On back pressed closing the socket connection
 	@Override
 	public void onBackPressed() {
-	    Log.d("BACK", "BackPressed");
+	    //Log.d("BACK", "BackPressed");
 	    new AlertDialog.Builder(this)
         .setMessage("Are you sure you want to leave chat?")
         .setCancelable(false)
         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+            	 Log.d("SHP", getSession());
             	 androidClient.disconnect();
                  ChatActivity.this.finish();
             }
@@ -135,13 +134,11 @@ public class ChatActivity extends Activity {
 		String flag = json.getString("flag");
 		//self to store sessionId in shared prefs.
 		if(flag.equals("self")){
-			Editor e = sp.edit();
-			e.putString("session", json.getString("sessionId"));
-			e.commit();
+			sp.edit().putString("session", json.getString("sessionId")).commit();
 		}
 	}
 	
 	private String getSession(){
-		return sp.getString("sessionId", "0");
+		return sp.getString("session", null);
 	}
 }
