@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,7 @@ public class ChatActivity extends Activity {
 	Button btnSend, btnLeave;
 	ListView listViewMsg;
 	WebSocketClient androidClient;
+	SharedPreferences sp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,9 +127,16 @@ public class ChatActivity extends Activity {
 	}
 	
 	private void checkmsg(String msg) {
+		//Reading text json and adding in JsonObject
 		JsonReader jsonReader = Json.createReader(new StringReader(msg));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
-		Log.d("TAG", json.getString("flag"));
+		String flag = json.getString("flag");
+		//self to store sessionId in shared prefs.
+		if(flag.equals("self")){
+			Editor e = sp.edit();
+			e.putString("session", json.getString("sessionId"));
+			e.commit();
+		}
 	}
 }
