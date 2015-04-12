@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:text="Leave Chat" />
 
+    <TextView
+        android:id="@+id/onlineTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Online: " />
+
     <ListView
         android:id="@+id/msgListView"
         android:layout_width="fill_parent"

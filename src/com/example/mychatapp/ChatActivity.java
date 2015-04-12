@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import javax.json.*;
 
@@ -33,6 +33,7 @@ public class ChatActivity extends Activity {
 	ListView listViewMsg;
 	WebSocketClient androidClient;
 	SharedPreferences sp;
+	TextView tvOnline;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class ChatActivity extends Activity {
 		btnSend = (Button)findViewById(R.id.sendBtn);
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
 		btnLeave = (Button)findViewById(R.id.leaveBtn);
+		tvOnline = (TextView)findViewById(R.id.onlineTv);
 		sp = this.getSharedPreferences("com.example.myChatApp", Context.MODE_PRIVATE);
 		androidClient = new WebSocketClient(URI.create(WEBSOCKETURL + URLEncoder.encode(name)), new WebSocketClient.Listener() {
 			
@@ -138,9 +140,20 @@ public class ChatActivity extends Activity {
 		if(flag.equals("self")){
 			sp.edit().putString("session", json.getString("sessionId")).commit();
 		}
+		else if(flag.equals("new")){
+			changeOnline(json.getInt("onlineCount"));			
+		}
 	}
 	
 	private String getSession(){
 		return sp.getString("session", null);
+	}
+	
+	private void changeOnline(final int x){
+		runOnUiThread(new Runnable() {
+		    public void run(){   
+		    	tvOnline.setText("Online: "+x);
+		    }
+		});
 	}
 }
