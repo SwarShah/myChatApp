@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,8 +54,6 @@ public class ChatActivity extends Activity {
 				// TODO Auto-generated method stub
 				Log.d("Calling","onError");
 				Log.e(ChatActivity.class.getSimpleName(), "Error! : " + arg0);
-
-				//Toast.makeText(getApplicationContext(), "Error! : " + arg0, Toast.LENGTH_LONG).show();
 			}
 			
 			@Override
@@ -69,5 +69,15 @@ public class ChatActivity extends Activity {
 			}
 		}, null);
 		androidClient.connect();
+		
+		//Send Button Click Event
+		btnSend.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				androidClient.send(inputMsg.getText().toString());
+			}
+		});
 	}
 }
