@@ -56,6 +56,7 @@ public final class R {
         public static final int hello_world=0x7f060001;
         public static final int name=0x7f060005;
         public static final int title_activity_chat=0x7f060006;
+        public static final int websocketurl=0x7f060007;
     }
     public static final class style {
         /** 
