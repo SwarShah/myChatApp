@@ -1,5 +1,6 @@
 package com.example.mychatapp;
 
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URLEncoder;
 
@@ -18,6 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import javax.json.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 public class ChatActivity extends Activity {
 	//Declaration of variables
 	static final String WEBSOCKETURL = "ws://mychatws-swar.rhcloud.com:8000/chat?name=";
@@ -50,9 +56,11 @@ public class ChatActivity extends Activity {
 			}
 			
 			@Override
-			public void onMessage(String arg0) {
+			public void onMessage(String msg) {
 				// TODO Auto-generated method stub
 				Log.d("Calling","onMessage string");
+				Log.d("Msg", msg);
+				checkmsg(msg);
 			}
 			
 			@Override
@@ -112,5 +120,12 @@ public class ChatActivity extends Activity {
         })
         .setNegativeButton("No", null)
         .show();
+	}
+	
+	private void checkmsg(String msg) {
+		JsonReader jsonReader = Json.createReader(new StringReader(msg));
+		JsonObject json = jsonReader.readObject();
+		jsonReader.close();
+		Log.d("TAG", json.getString("flag"));
 	}
 }
