@@ -92,7 +92,9 @@ public class ChatActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				androidClient.send(inputMsg.getText().toString());
+				SendMessage sm = new SendMessage("message", getSession(), inputMsg.getText().toString());
+				androidClient.send(sm.toJSON());
+				inputMsg.setText("");
 			}
 		});
 		
