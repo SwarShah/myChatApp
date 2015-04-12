@@ -8,6 +8,4 @@
     <string name="connect">Connect</string>
     <string name="name">Name</string>
     <string name="title_activity_chat">ChatActivity</string>
-    <string name="websocketurl">ws://10.32.16.38:8080/WebApplication11/chat?name=</string>
-
 </resources>
