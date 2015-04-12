@@ -50,6 +50,7 @@ public class ChatActivity extends Activity {
 		btnSend = (Button)findViewById(R.id.sendBtn);
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
 		btnLeave = (Button)findViewById(R.id.leaveBtn);
+		sp = this.getSharedPreferences("com.example.myChatApp", 0);
 		androidClient = new WebSocketClient(URI.create(WEBSOCKETURL + URLEncoder.encode(name)), new WebSocketClient.Listener() {
 			
 			@Override
