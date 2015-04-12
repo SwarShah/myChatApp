@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 public class ChatActivity extends Activity {
 	//Declaration of variables
-	static final String WEBSOCKETURL = "ws://10.32.16.38:8080/WebApplication11/chat?name=";
+	static final String WEBSOCKETURL = "ws://mychatws-swar.rhcloud.com:8000/chat?name=";
 	String name;
 	EditText inputMsg;
 	Button btnSend;
