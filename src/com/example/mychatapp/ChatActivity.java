@@ -21,7 +21,7 @@ public class ChatActivity extends Activity {
 	static final String WEBSOCKETURL = "ws://mychatws-swar.rhcloud.com:8000/chat?name=";
 	String name;
 	EditText inputMsg;
-	Button btnSend;
+	Button btnSend, btnLeave;
 	ListView listViewMsg;
 	WebSocketClient androidClient;
 	@Override
@@ -38,6 +38,7 @@ public class ChatActivity extends Activity {
 		inputMsg = (EditText)findViewById(R.id.msgInput);
 		btnSend = (Button)findViewById(R.id.sendBtn);
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
+		btnLeave = (Button)findViewById(R.id.leaveBtn);
 		androidClient = new WebSocketClient(URI.create(WEBSOCKETURL + URLEncoder.encode(name)), new WebSocketClient.Listener() {
 			
 			@Override
@@ -80,6 +81,16 @@ public class ChatActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				androidClient.send(inputMsg.getText().toString());
+			}
+		});
+		
+		//Leave Button Click Event
+		btnLeave.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				androidClient.disconnect();
 			}
 		});
 	}

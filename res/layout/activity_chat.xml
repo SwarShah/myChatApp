@@ -6,6 +6,12 @@
     android:orientation="vertical"
     tools:context="com.example.mychatapp.ChatActivity" >
 
+    <Button
+        android:id="@+id/leaveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave Chat" />
+
     <ListView
         android:id="@+id/msgListView"
         android:layout_width="fill_parent"
