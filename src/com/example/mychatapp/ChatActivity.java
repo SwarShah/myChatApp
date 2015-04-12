@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import com.codebutler.android_websockets.WebSocketClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,5 +95,22 @@ public class ChatActivity extends Activity {
 				androidClient.disconnect();
 			}
 		});
+	}
+	
+	//On back pressed closing the socket connection
+	@Override
+	public void onBackPressed() {
+	    Log.d("BACK", "BackPressed");
+	    new AlertDialog.Builder(this)
+        .setMessage("Are you sure you want to leave chat?")
+        .setCancelable(false)
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            	 androidClient.disconnect();
+                 ChatActivity.this.finish();
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
 	}
 }
