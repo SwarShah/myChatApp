@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.json.*;
 
@@ -141,10 +142,16 @@ public class ChatActivity extends Activity {
 			sp.edit().putString("session", json.getString("sessionId")).commit();
 		}
 		else if(flag.equals("new")){
-			changeOnline(json.getInt("onlineCount"));			
+			changeOnline(json.getInt("onlineCount"));
+			if(!json.getString("sessionId").equals(getSession())){
+				showToast(json.getString("name")+" has joined the conversation.");
+			}
 		}
 		else if(flag.equals("exit")){
 			changeOnline(json.getInt("onlineCount"));
+			if(!json.getString("sessionId").equals(getSession())){
+				showToast(json.getString("name")+" has left the conversation.");
+			}
 		}
 	}
 	
@@ -156,6 +163,14 @@ public class ChatActivity extends Activity {
 		runOnUiThread(new Runnable() {
 		    public void run(){   
 		    	tvOnline.setText("Online: "+x);
+		    }
+		});
+	}
+	
+	private void showToast(final String msg){
+		runOnUiThread(new Runnable() {
+		    public void run(){   
+		    	Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 		    }
 		});
 	}
