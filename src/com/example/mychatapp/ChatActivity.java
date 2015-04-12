@@ -139,4 +139,8 @@ public class ChatActivity extends Activity {
 			e.commit();
 		}
 	}
+	
+	private String getSession(){
+		return sp.getString("sessionId", "0");
+	}
 }
