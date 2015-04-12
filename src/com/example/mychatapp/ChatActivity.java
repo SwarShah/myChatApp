@@ -143,6 +143,9 @@ public class ChatActivity extends Activity {
 		else if(flag.equals("new")){
 			changeOnline(json.getInt("onlineCount"));			
 		}
+		else if(flag.equals("exit")){
+			changeOnline(json.getInt("onlineCount"));
+		}
 	}
 	
 	private String getSession(){
