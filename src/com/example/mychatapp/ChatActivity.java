@@ -3,6 +3,8 @@ package com.example.mychatapp;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.codebutler.android_websockets.WebSocketClient;
 
@@ -35,6 +37,8 @@ public class ChatActivity extends Activity {
 	WebSocketClient androidClient;
 	SharedPreferences sp;
 	TextView tvOnline;
+	List<ReceiveMessage> msgList;
+	ReceiveMessageListAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +55,9 @@ public class ChatActivity extends Activity {
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
 		btnLeave = (Button)findViewById(R.id.leaveBtn);
 		tvOnline = (TextView)findViewById(R.id.onlineTv);
+		msgList = new ArrayList<ReceiveMessage>();
+		adapter = new ReceiveMessageListAdapter(this, msgList);
+		listViewMsg.setAdapter(adapter);
 		sp = this.getSharedPreferences("com.example.myChatApp", Context.MODE_PRIVATE);
 		androidClient = new WebSocketClient(URI.create(WEBSOCKETURL + URLEncoder.encode(name)), new WebSocketClient.Listener() {
 			
