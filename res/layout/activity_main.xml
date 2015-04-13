@@ -30,7 +30,7 @@
 
         <EditText
             android:id="@+id/nameET"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@color/white"
             android:ems="10"
@@ -44,7 +44,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/connect" />
+            android:background="@color/green"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/connect"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 	
