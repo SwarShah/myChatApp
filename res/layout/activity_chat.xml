@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text="Online: "
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
     <ListView
         android:id="@+id/msgListView"
