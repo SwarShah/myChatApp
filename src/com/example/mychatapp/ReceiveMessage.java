@@ -1,16 +1,20 @@
 package com.example.mychatapp;
 
+//Class for received message
 public class ReceiveMessage {
 	private String from;
 	private String message;
 	private Boolean self;
+	
+	//Constructor
 	public ReceiveMessage(String from, String message, Boolean self) {
 		super();
 		this.setFrom(from);
 		this.setMessage(message);
 		this.setSelf(self);
 	}
-
+	
+	//Getters and setters
 	public String getFrom() {
 		return from;
 	}
