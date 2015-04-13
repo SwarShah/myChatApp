@@ -53,7 +53,7 @@ public class ChatActivity extends Activity {
 		inputMsg = (EditText)findViewById(R.id.msgInput);
 		btnSend = (Button)findViewById(R.id.sendBtn);
 		listViewMsg = (ListView)findViewById(R.id.msgListView);
-		btnLeave = (Button)findViewById(R.id.leaveBtn);
+		//btnLeave = (Button)findViewById(R.id.leaveBtn);
 		tvOnline = (TextView)findViewById(R.id.onlineTv);
 		msgList = new ArrayList<ReceiveMessage>();
 		adapter = new ReceiveMessageListAdapter(this, msgList);
@@ -109,7 +109,7 @@ public class ChatActivity extends Activity {
 		});
 		
 		//Leave Button Click Event
-		btnLeave.setOnClickListener(new OnClickListener() {
+		/*btnLeave.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -117,7 +117,7 @@ public class ChatActivity extends Activity {
 				androidClient.disconnect();
 				ChatActivity.this.finish();
 			}
-		});
+		});*/
 	}
 	
 	//On back pressed closing the socket connection
@@ -160,8 +160,30 @@ public class ChatActivity extends Activity {
 				showToast(json.getString("name")+" has left the conversation.");
 			}
 		}
+		else if(flag.equals("message")){
+			String from = json.getString("name");
+			String message = json.getString("message");
+			boolean self = true;
+			if(!json.getString("sessionId").equals(getSession())){
+				self = false;
+			}
+			ReceiveMessage rm = new ReceiveMessage(from, message, self);
+			addMessage(rm);			
+		}
 	}
 	
+	private void addMessage(final ReceiveMessage rm) {
+		// TODO Auto-generated method stub
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				msgList.add(rm);
+				adapter.notifyDataSetChanged();
+			}
+		});
+	}
+
 	private String getSession(){
 		return sp.getString("session", null);
 	}
