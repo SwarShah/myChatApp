@@ -1,10 +1,21 @@
 package com.example.mychatapp;
 
+import java.util.List;
+
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class ReceiveMessageListAdapter extends BaseAdapter {
+	
+	Context context;
+	List<ReceiveMessage> messagesItems;
+
+	public ReceiveMessageListAdapter(Context context, List<ReceiveMessage> navDrawerItems) {
+		this.context = context;
+		this.messagesItems = navDrawerItems;
+	}
 
 	@Override
 	public int getCount() {
